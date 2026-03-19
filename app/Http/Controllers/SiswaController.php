@@ -12,7 +12,8 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        //
+        $siswa = Siswa::with('user')->get();
+        return view('admin.siswa.index', compact('siswa'));
     }
 
     /**

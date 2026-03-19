@@ -12,7 +12,8 @@ class BukuController extends Controller
      */
     public function index()
     {
-        //
+        $buku = Buku::with('kategori')->get();
+        return view('admin.buku.index', compact('buku'));
     }
 
     /**

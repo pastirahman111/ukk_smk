@@ -12,7 +12,8 @@ class TransaksiController extends Controller
      */
     public function index()
     {
-        //
+        $transaksi = Transaksi::with(['user', 'buku'])->get();
+        return view('admin.transaksi.index', compact('transaksi'));
     }
 
     /**
