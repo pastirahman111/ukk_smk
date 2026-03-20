@@ -12,10 +12,15 @@
             <section class="content">
                 <div class="card">
                     <div class="card-header">
-                        <a href="#" class="btn btn-success">Tambah</a>
+                        <a href="{{ route('siswa.create') }}" class="btn btn-success">Tambah</a>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
                         <table id="example1" class="table table-bordered table-striped text-center">
                             <thead>
                                 <tr>
@@ -28,26 +33,23 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Trident</td>
-                                    <td>Internet
-                                        Explorer 4.0
-                                    </td>
-                                    <td>Win 95+</td>
-                                    <td>Win 95+</td>
-                                    <td>Win 95+</td>
-                                    <td>Win 95+</td>
-                                </tr>
-                                <tr>
-                                    <td>Trident</td>
-                                    <td>Trident</td>
-                                    <td>Internet
-                                        Explorer 5.0
-                                    </td>
-                                    <td>Win 95+</td>
-                                    <td>Win 95+</td>
-                                    <td>Win 95+</td>
-                                </tr>
+                                @foreach ($siswa as $item)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $item->user->nama ?? 'User dihapus/Kosong' }}</td>
+                                        <td>{{ $item->kelas }}</td>
+                                        <td>{{ $item->no_hp }}</td>
+                                        <td>{{ $item->alamat }}</td>
+                                        <td class="d-flex justify-content-center">
+                                            <a href="{{ route('siswa.edit', $item->id) }}" class="btn btn-warning mr-2">Edit</a>
+                                            <form action="{{ route('siswa.destroy', $item->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

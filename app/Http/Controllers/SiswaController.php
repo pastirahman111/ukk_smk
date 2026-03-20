@@ -3,64 +3,62 @@
 namespace App\Http\Controllers;
 
 use App\Models\Siswa;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class SiswaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $siswa = Siswa::with('user')->get();
         return view('admin.siswa.index', compact('siswa'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $user = User::where('role', 'siswa')
+                    ->whereNotIn('id', Siswa::pluck('user_id'))
+                    ->get();
+        return view('admin.siswa.create', compact('user'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'user_id' => 'required',
+            'kelas' => 'required',
+            'no_hp' => 'required',
+            'alamat' => 'required',
+        ]);
+
+        Siswa::create($request->all());
+
+        return redirect()->route('siswa.index')->with('success', 'Siswa berhasil ditambahkan');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Siswa $siswa)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Siswa $siswa)
     {
-        //
+        $user = User::where('role', 'siswa')->get();
+        return view('admin.siswa.edit', compact('siswa', 'user'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Siswa $siswa)
     {
-        //
+        $request->validate([
+            'user_id' => 'required',
+            'kelas' => 'required',
+            'no_hp' => 'required',
+            'alamat' => 'required',
+        ]);
+
+        $siswa->update($request->all());
+
+        return redirect()->route('siswa.index')->with('success', 'Siswa berhasil diupdate');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Siswa $siswa)
     {
-        //
+        $siswa->delete();
+        return redirect()->route('siswa.index')->with('success', 'Siswa berhasil dihapus');
     }
 }

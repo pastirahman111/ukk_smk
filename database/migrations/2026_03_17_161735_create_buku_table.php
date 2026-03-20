@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('penerbit', 100);
             $table->year('tahun_terbit');
             $table->integer('stok')->default(0);
+            $table->foreignId('kategori_id')->constrained('kategori')->onDelete('cascade');
             $table->timestamps();
         });
     }
