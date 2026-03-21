@@ -16,7 +16,7 @@ class SiswaController extends Controller
 
     public function create()
     {
-        $user = User::where('role', 'siswa')
+        $user = User::where('role','siswa')
                     ->whereNotIn('id', Siswa::pluck('user_id'))
                     ->get();
         return view('admin.siswa.create', compact('user'));
@@ -38,7 +38,7 @@ class SiswaController extends Controller
 
     public function edit(Siswa $siswa)
     {
-        $user = User::where('role', 'siswa')->get();
+        $user = User::where('role','siswa')->get();
         return view('admin.siswa.edit', compact('siswa', 'user'));
     }
 

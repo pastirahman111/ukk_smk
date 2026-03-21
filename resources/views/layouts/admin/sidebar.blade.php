@@ -95,19 +95,7 @@
                             </p>
                         </a>
                     </li>
-                    <li class="nav-header">Laporan</li>
-                    <li class="nav-item">
-                        <a href="/laporan" class="nav-link {{ request()->is('laporan') ? 'active' : '' }}"> <i
-                                class="nav-icon fas fa-edit"></i>
-                            <p>
-                                Laporan
-                            </p>
-                        </a>
-                    </li>
-
                 </ul>
             </nav>
-            <!-- /.sidebar-menu -->
         </div>
-        <!-- /.sidebar -->
     </aside>
