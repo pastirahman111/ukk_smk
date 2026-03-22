@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}">
 </head>
 
-<body class="register-page" style="background-image: url('{{ asset('assets/bg.jpg') }}'); background-size: cover;">
+<body class="register-page" style="background-image: url('{{ asset('assets/dist/img/photo4.jpg') }}'); background-size: cover;">
     <div class="register-box">
         <div class="register-logo">
             <b>Selamat Datang</b>

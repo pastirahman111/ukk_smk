@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}">
 </head>
 
-<body class="register-page" style="background-image: url('{{ asset('assets/bg.jpg') }}'); background-size: cover;">
+<body class="register-page" style="background-image: url('{{ asset('assets/dist/img/photo4.jpg') }}'); background-size: cover;">
     <div class="register-box">
         <div class="register-logo">
             <b>Selamat Datang</b>
@@ -29,13 +29,27 @@
 
                 @if ($errors->any())
                     <div class="alert alert-danger">
-                        @foreach ($errors->all() as $error)
-                            <div>{{ $error }}</div>
-                        @endforeach
+                        <ul class="mb-0">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
                     </div>
                 @endif
 
-                <form action="{{route('login.proses')}}" method="post">
+                @if (session('error'))
+                    <div class="alert alert-danger text-center font-weight-bold">
+                        {{ session('error') }}
+                    </div>
+                @endif
+
+                @if (session('success'))
+                    <div class="alert alert-success text-center font-weight-bold">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                <form action="{{route('login.proses')}}" method="POST">
                     @csrf
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" name="username" placeholder="Username">

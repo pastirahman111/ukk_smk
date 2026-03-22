@@ -28,18 +28,18 @@ class AuthController extends Controller
 
         // simpan ke users
         $user = User::create([
-            'nama' => $request->nama,
-            'username' => $request->username,
-            'password' => $request->password,
-            'role' => 'siswa'
+            'nama'      => $request->nama,
+            'username'  => $request->username,
+            'password'  => Hash::make($request->password),
+            'role'      => 'siswa'
         ]);
 
         // simpan ke siswa
         Siswa::create([
-            'user_id' => $user->id,
-            'kelas' => $request->kelas,
-            'no_hp' => $request->no_hp,
-            'alamat' => $request->alamat
+            'user_id'   => $user->id,
+            'kelas'     => $request->kelas,
+            'no_hp'     => $request->no_hp,
+            'alamat'    => $request->alamat
         ]);
 
         return redirect('login')->with('success', 'Registrasi berhasil!');
@@ -66,7 +66,7 @@ class AuthController extends Controller
             if (Auth::user()->role == 'admin') {
                 return redirect('/dashboard');
             } else {
-                return redirect('/siswa');
+                return redirect('/siswa/index');
             }
         }
 

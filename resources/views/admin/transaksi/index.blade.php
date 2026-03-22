@@ -13,10 +13,10 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <a href="{{ route('transaksi.create') }}" class="btn btn-success">Tambah Transaksi</a>
+                            <a href="{{ route('transaksi.create') }}" class="btn btn-success">Tambah</a>
                             <div>
                                 <a href="{{ route('transaksi.export.excel', request()->query()) }}"
-                                    class="btn btn-success mr-2"><i class="fas fa-file-excel"></i> Export Excel</a>
+                                    class="btn btn-success mr-2"><i class="fas fa-file-excel"></i>Excel</a>
                                 <a href="{{ route('transaksi.export.print', request()->query()) }}" target="_blank"
                                     class="btn btn-danger"><i class="fas fa-print"></i> Print</a>
                             </div>
