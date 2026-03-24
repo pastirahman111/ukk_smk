@@ -38,6 +38,24 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
+                        @if (session('success'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ session('success') }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endif
+
+                        @if (session('error'))
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                {{ session('error') }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endif
+
                         <table id="example1" class="table table-bordered table-striped text-center">
                             <thead>
                                 <tr>
@@ -53,19 +71,41 @@
                             <tbody>
                                 @foreach ($transaksi as $item)
                                     <tr>
-                                        <td>{{ $item->id }}</td>
+                                        <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->user->nama }}</td>
                                         <td>{{ $item->buku->judul }}</td>
                                         <td>{{ $item->tanggal_pinjam }}</td>
-                                        <td>{{ $item->tanggal_kembali }}</td>
-                                        <td>{{ $item->status }}</td>
+                                        <td>{{ $item->tanggal_kembali ?? '-' }}</td>
+                                        <td>
+                                            @if($item->status == 'menunggu')
+                                                <span class="badge badge-warning">Menunggu</span>
+                                            @elseif($item->status == 'dipinjam')
+                                                <span class="badge badge-primary">Dipinjam</span>
+                                            @else
+                                                <span class="badge badge-success">Dikembalikan</span>
+                                            @endif
+                                        </td>
                                         <td class="d-flex justify-content-center">
+                                            @if($item->status == 'menunggu')
+                                                <form action="{{ route('transaksi.setuju', $item->id) }}" method="POST" class="mr-2">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-success btn-sm">Setuju</button>
+                                                </form>
+                                            @endif
+
+                                            @if($item->status == 'dipinjam')
+                                                <form action="{{ route('transaksi.kembalikan', $item->id) }}" method="POST" class="mr-2">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-primary btn-sm">Kembalikan</button>
+                                                </form>
+                                            @endif
+
                                             <a href="{{ route('transaksi.edit', $item->id) }}"
-                                                class="btn btn-info mr-2">Edit</a>
+                                                class="btn btn-info btn-sm mr-2">Edit</a>
                                             <form action="{{ route('transaksi.destroy', $item->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger"
+                                                <button type="submit" class="btn btn-danger btn-sm"
                                                     onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
                                             </form>
                                         </td>

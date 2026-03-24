@@ -135,4 +135,38 @@ class TransaksiController extends Controller
         $transaksi->delete($transaksi->id);
         return redirect()->route('transaksi.index')->with('success', 'Transaksi berhasil dihapus');
     }
+
+    public function setuju(Transaksi $transaksi)
+    {
+        if ($transaksi->status !== 'menunggu') {
+            return back()->with('error', 'Transaksi ini tidak bisa disetujui.');
+        }
+
+        $buku = $transaksi->buku;
+        if ($buku->stok <= 0) {
+            return back()->with('error', 'Stok buku habis. Tidak bisa menyetujui peminjaman.');
+        }
+
+        // Update status and decrease stock
+        $transaksi->update(['status' => 'dipinjam']);
+        $buku->decrement('stok', 1);
+
+        return back()->with('success', 'Peminjaman disetujui.');
+    }
+
+    public function kembalikan(Transaksi $transaksi)
+    {
+        if ($transaksi->status !== 'dipinjam') {
+            return back()->with('error', 'Transaksi ini tidak bisa dikembalikan.');
+        }
+
+        // Update status, set return date, and increase stock
+        $transaksi->update([
+            'status' => 'dikembalikan',
+            'tanggal_kembali' => now()
+        ]);
+        $transaksi->buku->increment('stok', 1);
+
+        return back()->with('success', 'Buku telah dikembalikan.');
+    }
 }

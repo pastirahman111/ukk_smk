@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Buku;
 use App\Models\Siswa;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -58,7 +59,13 @@ class SiswaController extends Controller
 
     public function destroy(Siswa $siswa)
     {
-        $siswa->delete();
+        $siswa->delete($siswa->id);
         return redirect()->route('siswa.index')->with('success', 'Siswa berhasil dihapus');
+    }
+
+    public function detail($id)
+    {
+        $buku = Buku::findOrFail($id);
+        return view('siswa.detail', compact('buku'));
     }
 }
