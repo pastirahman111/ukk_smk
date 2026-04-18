@@ -16,13 +16,12 @@
                 <div class="space-y-6">
                     <div>
                         <h1 class="text-2xl font-bold text-slate-800">{{ $user->nama }}</h1>
-                        <p class="text-gray-500">Student Account</p>
+                        <p class="text-gray-500">Profile Saya</p>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="space-y-4">
-                            <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Account Information
-                            </h3>
+                            <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Informasi Akun</h3>
                             <div class="space-y-3 text-sm">
                                 <div class="flex justify-between py-2 border-b border-gray-50">
                                     <span class="text-gray-500">Username</span>
@@ -36,7 +35,7 @@
                         </div>
 
                         <div class="space-y-4">
-                            <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Student Details</h3>
+                            <h3 class="text-sm font-semibold text-gray-400 uppercase tracking-wider">Detail</h3>
                             <div class="space-y-3 text-sm">
                                 <div class="flex justify-between py-2 border-b border-gray-50">
                                     <span class="text-gray-500">Class</span>

@@ -18,22 +18,22 @@
                     <div class="col-lg-3 col-6">
                         <div class="small-box bg-info">
                             <div class="inner text-center">
-                                <h3>150</h3>
-                                <p>New Orders</p>
+                                <h3>{{ $totalkategori }}</h3>
+                                <p>Total Kategori</p>
                             </div>
-                            <a href="#" class="small-box-footer">
-                                Informasi lanjut
+                            <a href="{{ route('kategori.index') }}" class="small-box-footer">
+                                View
                             </a>
                         </div>
                     </div>
                     <div class="col-lg-3 col-6">
                         <div class="small-box bg-success">
                             <div class="inner text-center">
-                                <h3>53<sup style="font-size: 20px">%</sup></h3>
-                                <p>Bounce Rate</p>
+                                <h3>{{ $totalbuku }}</h3>
+                                <p>Total Buku</p>
                             </div>
-                            <a href="#" class="small-box-footer">
-                                Informasi lanjut
+                            <a href="{{ route('buku.index') }}" class="small-box-footer">
+                                View
                             </a>
                         </div>
                     </div>
@@ -42,22 +42,11 @@
                         <!-- small box -->
                         <div class="small-box bg-warning">
                             <div class="inner text-center">
-                                <h3>44</h3>
-                                <p>User Registrations</p>
+                                <h3>{{ $totalsiswa }}</h3>
+                                <p>Total Siswa</p>
                             </div>
-                            <a href="#" class="small-box-footer">
-                                Informasi lanjut
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-6">
-                        <div class="small-box bg-danger">
-                            <div class="inner text-center">
-                                <h3>65</h3>
-                                <p>Unique Visitors</p>
-                            </div>
-                            <a href="#" class="small-box-footer">
-                                Informasi lanjut 
+                            <a href="{{ route('siswa.index') }}" class="small-box-footer">
+                                View
                             </a>
                         </div>
                     </div>

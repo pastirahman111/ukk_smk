@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\KategoriController;
@@ -29,9 +30,7 @@ Route::prefix('siswa')->middleware(['auth', 'role:siswa'])->group(function () {
 
 // middleware admin
 Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('dashboard', function () {
-        return view('admin.dashboard');
-    });
+    Route::get('dashboard', [AdminDashboardController::class, 'index']);
 
     Route::resource('kategori', KategoriController::class);
     Route::resource('buku', BukuController::class);
